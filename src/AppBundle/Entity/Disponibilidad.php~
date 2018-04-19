@@ -133,4 +133,38 @@ class Disponibilidad
     {
         return $this->horaFin;
     }
+
+    /**
+     * Add disponibilidad
+     *
+     * @param \AppBundle\Entity\Agenda $disponibilidad
+     *
+     * @return Disponibilidad
+     */
+    public function addDisponibilidad(\AppBundle\Entity\Agenda $disponibilidad)
+    {
+        $this->disponibilidads[] = $disponibilidad;
+
+        return $this;
+    }
+
+    /**
+     * Remove disponibilidad
+     *
+     * @param \AppBundle\Entity\Agenda $disponibilidad
+     */
+    public function removeDisponibilidad(\AppBundle\Entity\Agenda $disponibilidad)
+    {
+        $this->disponibilidads->removeElement($disponibilidad);
+    }
+
+    /**
+     * Get disponibilidads
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getDisponibilidads()
+    {
+        return $this->disponibilidads;
+    }
 }

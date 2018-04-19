@@ -16,6 +16,7 @@
     "tests"
   ],
   "dependencies": {
-    "admin-lte": "^2.4.3"
+    "admin-lte": "^2.4.3",
+    "datatables.net-bs": "^2.1.1"
   }
 }

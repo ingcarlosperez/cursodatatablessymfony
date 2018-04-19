@@ -257,4 +257,38 @@ class Usuario
     {
         return $this->pais;
     }
+
+    /**
+     * Add usuario
+     *
+     * @param \AppBundle\Entity\Agenda $usuario
+     *
+     * @return Usuario
+     */
+    public function addUsuario(\AppBundle\Entity\Agenda $usuario)
+    {
+        $this->usuarios[] = $usuario;
+
+        return $this;
+    }
+
+    /**
+     * Remove usuario
+     *
+     * @param \AppBundle\Entity\Agenda $usuario
+     */
+    public function removeUsuario(\AppBundle\Entity\Agenda $usuario)
+    {
+        $this->usuarios->removeElement($usuario);
+    }
+
+    /**
+     * Get usuarios
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getUsuarios()
+    {
+        return $this->usuarios;
+    }
 }
