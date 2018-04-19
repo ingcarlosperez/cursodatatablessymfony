@@ -80,3 +80,21 @@ assetic:
           bin: /usr/bin/uglifyjs
         uglifycss:
           bin: /usr/bin/uglifycss
+
+# Default configuration for extension with alias: "fos_rest"
+fos_rest:
+    format_listener:
+        enabled:              true
+    routing_loader:
+        default_format:       json
+        include_format:       false
+    versioning:
+        enabled:              true
+        default_version: ~
+        resolvers:
+            query:
+                enabled: true
+                parameter_name: version
+            custom_header:
+                enabled: true
+                header_name: X-Accept-Version
