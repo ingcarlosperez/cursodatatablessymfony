@@ -16,33 +16,21 @@ class ApiDisponibilidadController extends FOSRestController implements ClassReso
     $em = $this->getDoctrine()->getManager();
     $disponibilidad = $this->getDoctrine()->getRepository('AppBundle:Disponibilidad');
     $orderedcolumn = array("d.id", "d.fecha", "d.horaInicio", "d.horaFin");
-    $numcolumn = ($request->query->get('column') != '' && $request->query->get('column') <= 3) ? $request->query->get('column') : 0;
-
-    if ( $numcolumn == 1 ) {
-      $whereconditions = 'd.fecha like :searchValue';
-    } elseif ($numcolumn == 2) {
-      $whereconditions = 'd.horaInicio like :searchValue';
-    } elseif ($numcolumn == 3) {
-      $whereconditions = 'd.horaFin like :searchValue';
-    } else {
-      $whereconditions = 'd.id like :searchValue';
-    }
-
 
     $datos = $disponibilidad->createQueryBuilder('d')
-    ->andWhere($whereconditions)
-    ->orderBy($orderedcolumn[$numcolumn], $request->query->get('dir'))
+    ->andWhere('d.id like :searchvalue OR d.fecha like :searchvalue OR d.horaInicio like :searchvalue OR d.horaFin like :searchvalue')
+    ->orderBy($orderedcolumn[$request->query->get('order')['0']["column"]], $request->query->get('order')['0']["dir"])
     ->setFirstResult($request->query->get('start'))
-    ->setMaxResults($request->query->get('lenght'))
-    ->setParameter('searchValue', '%'.$request->query->get('search')["value"].'%')
+    ->setMaxResults($request->query->get('length'))
+    ->setParameter('searchvalue', '%'.$request->query->get('search')["value"].'%')
     ->getQuery()
     ->getResult();
 
     $cantidaddatos = $disponibilidad->createQueryBuilder('d')
     ->select('COUNT(d.id)')
-    ->andWhere($whereconditions)
-    ->orderBy($orderedcolumn[$numcolumn], $request->query->get('dir'))
-    ->setParameter('searchValue', '%'.$request->query->get('search')["value"].'%')
+    ->andWhere('d.id like :searchvalue OR d.fecha like :searchvalue OR d.horaInicio like :searchvalue OR d.horaFin like :searchvalue')
+    ->orderBy($orderedcolumn[$request->query->get('order')['0']["column"]], $request->query->get('order')['0']["dir"])
+    ->setParameter('searchvalue', '%'.$request->query->get('search')["value"].'%')
     ->getQuery()
     ->getSingleScalarResult();
 
