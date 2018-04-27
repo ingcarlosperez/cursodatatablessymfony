@@ -3,7 +3,7 @@ namespace AppBundle\Controller;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as FOS;
 use FOS\RestBundle\Routing\ClassResourceInterface;
-use Symfony\Components\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Request;
 
 Class ApiController extends FOSRestController implements ClassResourceInterface
 {
